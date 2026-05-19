@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout — WARUNG DIGITAL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">WARUNG<span>DIGITAL</span></a>
+    <nav class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="produk.html">Produk</a>
+    </nav>
+    <div class="nav-right">
+      <button class="cart-btn" onclick="toggleCart()">
+        🛒 <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container">
+    <h1>Checkout</h1>
+    <p>Lengkapi data pengiriman kamu</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div id="emptyCartMsg" style="display:none; text-align:center; padding: 4rem 0;">
+      <div style="font-size:4rem">🛒</div>
+      <h2>Keranjang Kosong</h2>
+      <p>Silakan tambahkan produk terlebih dahulu.</p>
+      <a href="produk.html" class="btn-primary" style="margin-top:1rem;display:inline-block">Belanja Sekarang</a>
+    </div>
+
+    <div class="checkout-layout" id="checkoutLayout">
+      <!-- FORM -->
+      <div class="checkout-form">
+        <h3>Data Penerima</h3>
+        <div class="form-group">
+          <label>Nama Lengkap *</label>
+          <input type="text" id="nama" placeholder="Masukkan nama lengkap" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>No. HP / WhatsApp *</label>
+          <input type="text" id="telepon" placeholder="Contoh: 0812xxxxxxxx" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="email@contoh.com" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>Alamat Lengkap *</label>
+          <textarea id="alamat" placeholder="Nama jalan, RT/RW, Kelurahan, Kecamatan..." class="form-input" rows="3"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Kota / Kabupaten *</label>
+            <input type="text" id="kota" placeholder="Contoh: Makassar" class="form-input">
+          </div>
+          <div class="form-group">
+            <label>Kode Pos *</label>
+            <input type="text" id="kodepos" placeholder="90111" class="form-input">
+          </div>
+        </div>
+
+        <h3 style="margin-top:2rem">Metode Pengiriman</h3>
+        <div class="pengiriman-options">
+          <label class="pengiriman-opt">
+            <input type="radio" name="pengiriman" value="reguler" checked onchange="hitungTotal()">
+            <div>
+              <strong>JNE Reguler</strong>
+              <span>2-3 hari kerja</span>
+            </div>
+            <span class="pg-harga">Rp 15.000</span>
+          </label>
+          <label class="pengiriman-opt">
+            <input type="radio" name="pengiriman" value="express" onchange="hitungTotal()">
+            <div>
+              <strong>JNE Express</strong>
+              <span>1 hari kerja</span>
+            </div>
+            <span class="pg-harga">Rp 30.000</span>
+          </label>
+          <label class="pengiriman-opt">
+            <input type="radio" name="pengiriman" value="sameday" onchange="hitungTotal()">
+            <div>
+              <strong>Same Day Delivery</strong>
+              <span>Hari ini (dalam kota)</span>
+            </div>
+            <span class="pg-harga">Rp 50.000</span>
+          </label>
+        </div>
+
+        <h3 style="margin-top:2rem">Metode Pembayaran</h3>
+        <div class="pembayaran-options">
+          <label class="bayar-opt">
+            <input type="radio" name="bayar" value="transfer" checked>
+            <span>🏦 Transfer Bank</span>
+          </label>
+          <label class="bayar-opt">
+            <input type="radio" name="bayar" value="gopay">
+            <span>💚 GoPay</span>
+          </label>
+          <label class="bayar-opt">
+            <input type="radio" name="bayar" value="ovo">
+            <span>💜 OVO</span>
+          </label>
+          <label class="bayar-opt">
+            <input type="radio" name="bayar" value="cod">
+            <span>💵 COD (Bayar di Tempat)</span>
+          </label>
+        </div>
+
+        <div class="form-group" style="margin-top:1.5rem">
+          <label>Catatan untuk Penjual (opsional)</label>
+          <textarea id="catatan" placeholder="Contoh: tolong dibungkus rapi..." class="form-input" rows="2"></textarea>
+        </div>
+      </div>
+
+      <!-- ORDER SUMMARY -->
+      <div class="order-summary">
+        <h3>Ringkasan Pesanan</h3>
+        <div class="order-items" id="orderItems"></div>
+        <div class="order-totals">
+          <div class="order-row">
+            <span>Subtotal</span>
+            <span id="subtotalDisplay">Rp 0</span>
+          </div>
+          <div class="order-row">
+            <span>Ongkos Kirim</span>
+            <span id="ongkirDisplay">Rp 15.000</span>
+          </div>
+          <div class="order-row total-row">
+            <span>Total</span>
+            <strong id="totalDisplay">Rp 0</strong>
+          </div>
+        </div>
+        <button class="btn-primary" style="width:100%;margin-top:1.5rem" onclick="prosesOrder()">
+          ✅ Pesan Sekarang
+        </button>
+        <p style="font-size:0.8rem;text-align:center;margin-top:0.75rem;opacity:0.6">
+          Dengan memesan, kamu menyetujui syarat & ketentuan kami.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal" style="display:none">
+  <div class="modal-box">
+    <div class="modal-icon">🎉</div>
+    <h2>Pesanan Berhasil!</h2>
+    <p>Terima kasih telah berbelanja di WarungDigital. Pesanan kamu sedang diproses.</p>
+    <div class="order-number" id="orderNumber"></div>
+    <p style="font-size:0.9rem;opacity:0.7">Konfirmasi akan dikirim via WhatsApp / Email.</p>
+    <a href="index.html" class="btn-primary" style="margin-top:1.5rem;display:inline-block" onclick="clearCartAfterOrder()">
+      Kembali ke Beranda
+    </a>
+  </div>
+</div>
+
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>🛒 Keranjang Belanja</h3>
+    <button onclick="toggleCart()" class="close-cart">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">Keranjang masih kosong</div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">Total: <strong id="cartTotal">Rp 0</strong></div>
+    <a href="checkout.html" class="btn-primary" style="display:block;text-align:center">Checkout Sekarang →</a>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/app.js"></script>
+<script src="js/checkout.js"></script>
+</body>
+</html>

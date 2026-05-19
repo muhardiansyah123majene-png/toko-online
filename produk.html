@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Produk — WARUNG DIGITAL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">WARUNG<span>DIGITAL</span></a>
+    <nav class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="produk.html" class="active">Produk</a>
+      <a href="tentang.html">Tentang</a>
+    </nav>
+    <div class="nav-right">
+      <button class="cart-btn" onclick="toggleCart()">
+        🛒 Keranjang <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container">
+    <h1>Semua Produk</h1>
+    <p>Temukan produk impian kamu di sini</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="produk-layout">
+      <!-- FILTER SIDEBAR -->
+      <aside class="filter-sidebar">
+        <h3>Filter</h3>
+
+        <div class="filter-group">
+          <label class="filter-label">Kategori</label>
+          <div class="filter-options" id="filterKategori">
+            <label><input type="checkbox" value="semua" checked onchange="filterProduk()"> Semua</label>
+            <label><input type="checkbox" value="fashion" onchange="filterProduk()"> 👗 Fashion</label>
+            <label><input type="checkbox" value="elektronik" onchange="filterProduk()"> 📱 Elektronik</label>
+            <label><input type="checkbox" value="makanan" onchange="filterProduk()"> 🍜 Makanan</label>
+            <label><input type="checkbox" value="olahraga" onchange="filterProduk()"> ⚽ Olahraga</label>
+            <label><input type="checkbox" value="kecantikan" onchange="filterProduk()"> 💄 Kecantikan</label>
+            <label><input type="checkbox" value="rumah" onchange="filterProduk()"> 🏡 Rumah</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Harga Maksimal</label>
+          <input type="range" id="priceRange" min="10000" max="2000000" value="2000000" step="10000" oninput="updatePrice(this.value)">
+          <div class="price-display">s/d <span id="priceDisplay">Rp 2.000.000</span></div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Urutkan</label>
+          <select id="sortBy" onchange="filterProduk()" class="sort-select">
+            <option value="default">Default</option>
+            <option value="harga-asc">Harga Terendah</option>
+            <option value="harga-desc">Harga Tertinggi</option>
+            <option value="nama-asc">Nama A-Z</option>
+          </select>
+        </div>
+
+        <button class="btn-outline" onclick="resetFilter()">Reset Filter</button>
+      </aside>
+
+      <!-- PRODUK LIST -->
+      <div class="produk-main">
+        <div class="produk-topbar">
+          <input type="text" id="searchInput" placeholder="🔍 Cari produk..." class="search-input" oninput="filterProduk()">
+          <span id="produkCount" class="produk-count"></span>
+        </div>
+        <div class="produk-grid" id="produkList"></div>
+        <div id="emptyState" class="empty-state" style="display:none">
+          <div style="font-size:3rem">😕</div>
+          <h3>Produk tidak ditemukan</h3>
+          <p>Coba ubah filter atau kata kunci pencarian</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">© 2026 WarungDigital. All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>🛒 Keranjang Belanja</h3>
+    <button onclick="toggleCart()" class="close-cart">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">Keranjang masih kosong</div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">Total: <strong id="cartTotal">Rp 0</strong></div>
+    <a href="checkout.html" class="btn-primary" style="display:block;text-align:center">Checkout Sekarang →</a>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/app.js"></script>
+<script>
+  filterProduk();
+</script>
+</body>
+</html>

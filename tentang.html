@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tentang Kami — WARUNG DIGITAL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">WARUNG<span>DIGITAL</span></a>
+    <nav class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="produk.html">Produk</a>
+      <a href="tentang.html" class="active">Tentang</a>
+    </nav>
+    <div class="nav-right">
+      <button class="cart-btn" onclick="toggleCart()">
+        🛒 Keranjang <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container">
+    <h1>Tentang Kami</h1>
+    <p>Cerita di balik WarungDigital</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="about-layout">
+      <div class="about-text">
+        <h2>Kami Hadir untuk Memudahkan Hidup Kamu</h2>
+        <p>WarungDigital lahir dari semangat sederhana: membuat belanja online terasa seperti belanja di warung langganan — hangat, jujur, dan terpercaya.</p>
+        <p>Sejak 2022, kami melayani ribuan pelanggan di seluruh Indonesia dengan produk berkualitas, harga transparan, dan layanan yang ramah.</p>
+        <p>Kami percaya bahwa belanja online bukan hanya soal transaksi, tapi juga pengalaman. Itulah kenapa kami terus berinovasi untuk memberikan pengalaman terbaik buat kamu.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">10K+</div>
+          <div>Pelanggan Aktif</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">500+</div>
+          <div>Produk Tersedia</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">4.9★</div>
+          <div>Rating Rata-rata</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">34</div>
+          <div>Provinsi Tercover</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--surface)">
+  <div class="container">
+    <h2 class="section-title" style="text-align:center;margin-bottom:3rem">Kenapa Pilih Kami?</h2>
+    <div class="fitur-grid">
+      <div class="fitur-card">
+        <div class="fitur-icon">✅</div>
+        <h4>Produk Terjamin</h4>
+        <p>Semua produk melalui proses seleksi ketat. Kualitas bukan sekadar klaim.</p>
+      </div>
+      <div class="fitur-card">
+        <div class="fitur-icon">🚀</div>
+        <h4>Pengiriman Cepat</h4>
+        <p>Bermitra dengan kurir terpercaya. Pesanan diproses dalam 24 jam.</p>
+      </div>
+      <div class="fitur-card">
+        <div class="fitur-icon">🔒</div>
+        <h4>Transaksi Aman</h4>
+        <p>Sistem pembayaran terenkripsi. Data kamu selalu aman bersama kami.</p>
+      </div>
+      <div class="fitur-card">
+        <div class="fitur-icon">💬</div>
+        <h4>CS Responsif</h4>
+        <p>Tim kami siap membantu 7 hari seminggu via WhatsApp dan email.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">WARUNG<span>DIGITAL</span></div>
+        <p>Platform belanja online terpercaya dengan pengalaman berbelanja yang menyenangkan.</p>
+      </div>
+      <div>
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="produk.html">Produk</a></li>
+          <li><a href="tentang.html">Tentang Kami</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontak</h4>
+        <ul>
+          <li>📧 hello@warungdigital.id</li>
+          <li>📞 0812-3456-7890</li>
+          <li>📍 Makassar, Sulawesi Selatan</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 WarungDigital. All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>🛒 Keranjang Belanja</h3>
+    <button onclick="toggleCart()" class="close-cart">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">Keranjang masih kosong</div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">Total: <strong id="cartTotal">Rp 0</strong></div>
+    <a href="checkout.html" class="btn-primary" style="display:block;text-align:center">Checkout Sekarang →</a>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
